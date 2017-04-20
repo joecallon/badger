@@ -1,0 +1,127 @@
+/*------------------------------------*\
+    $MIXINS
+\*------------------------------------*/
+
+/**
+ * Simple gradients
+ */
+@mixin simpleGradient($from, $to) {
+	/* fallback/image non-cover color */
+	background-color: $from;
+	/* Firefox 3.6+ */
+	background-image: -moz-linear-gradient($from, $to);
+	/* Safari 4+, Chrome 1+ */
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+	/* Safari 5.1+, Chrome 10+ */
+	background-image: -webkit-linear-gradient($from, $to);
+	/* Opera 11.10+ */
+	background-image: -o-linear-gradient($from, $to);
+}
+
+/* Font size */
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font_size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+// Usage: @include font_size(14px);
+// The rem value will override pixels if browser support is available
+
+/* Line height */
+@mixin line-height($heightValue: 12 ){
+    line-height: $heightValue + px; //fallback for old browsers
+    line-height: (0.125 * $heightValue) + rem;
+}
+// Usage: @include line-height(16);
+// The rem value will override pixels if browser support is available
+
+/* Opacity - all browsers */
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); // IE8
+}
+// Usage: @include opacity(0.8);
+
+
+/* Vendor prefixes */
+@mixin vendor($property, $value) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		#{$prefix}#{$property}: $value;
+		}
+}
+// Usage: @include vendor(transition, 0.5s);
+
+/* Center block level element */
+@mixin cb {
+  display: block;
+  margin: 0 auto;
+}
+// Usage: @include cb();
+
+/* Filters */
+@mixin filter($filter-type,$filter-amount) { 
+  -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+  -moz-filter: $filter-type+unquote('(#{$filter-amount})');
+  -ms-filter: $filter-type+unquote('(#{$filter-amount})');
+  -o-filter: $filter-type+unquote('(#{$filter-amount})');
+  filter: $filter-type+unquote('(#{$filter-amount})');
+}
+// Usage: @include filter(saturate, 2);
+
+/* Rotate */
+@mixin rotate($degrees) {
+  -webkit-transform: rotate(#{$degrees}deg);
+  -moz-transform: rotate(#{$degrees}deg);
+  -ms-transform: rotate(#{$degrees}deg);
+  -o-transform: rotate(#{$degrees}deg);
+  transform: rotate(#{$degrees}deg);
+  filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+  zoom: 1;
+ }
+// Usage: @include rotate(180);
+
+/* Transition */
+@mixin transition($transition-property, $transition-length, $transition-curve) {
+  -webkit-transition: $transition-property $transition-length+s $transition-curve;
+     -moz-transition: $transition-property $transition-length+s $transition-curve;
+       -o-transition: $transition-property $transition-length+s $transition-curve;
+          transition: $transition-property $transition-length+s $transition-curve;
+}
+// Usage: @include transition(width, 0.3, ease-in-out);
+// Available transition curves in CSS3: linear, ease, ease-in, ease-out, ease-in-out
+
+/* Vertical align */
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+// Usage: @include vertical-align();
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+// Usage: @include box-shadow(2px, 2px, 3px, #000);
+
+@mixin rgba($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}
+// Usage: @include rgba(#000, 0.3); 
+

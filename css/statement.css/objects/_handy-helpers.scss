@@ -1,0 +1,188 @@
+/*------------------------------------*\
+    $HANDY-HELPERS
+    
+    Some handy stuff which it's generally useful to have access to
+\*------------------------------------*/
+
+.cf {
+    &:after{
+        content:"";
+        display:table;
+        clear:both;
+    }
+}
+
+/**
+ * .row - clears and adds a margin-bottom to the div
+ */
+
+	.row {
+		@extend .cf;
+		margin-bottom: $base-spacing-unit;
+	}
+	
+/**
+ * .half-bottom - reduces the margin to half the usual size
+ */
+	
+	.half-bottom {
+		margin-bottom: $half-spacing-unit;
+	}
+
+/**
+ * .remove-top - gets rid of any margins / border / padding
+ */
+
+	.remove-top {
+		margin-top: 0!important;
+	}
+	
+	.remove-border-top {
+		border-top: none!important;
+	}
+	
+	.remove-padding-top {
+		padding-top: 0!important;
+	}
+
+/**
+ * .remove-right - gets rid of any margins / border / padding
+ */
+
+	.remove-right {
+		margin-right: 0!important;
+	}
+	
+	.remove-border-right {
+		border-right: none!important;
+	}
+	
+	.remove-padding-right {
+		padding-right: 0!important;
+	}
+
+/**
+ * .remove-bottom - gets rid of any margins / border / padding
+ */
+
+	.remove-bottom {
+		margin-bottom: 0!important;
+	}
+	
+	.remove-padding-bottom {
+		padding-bottom: 0!important;
+	}
+	
+	.remove-border-bottom {
+		border-bottom: none!important;
+	}
+
+/**
+ * .remove-left - gets rid of any margins / border / padding
+ */
+
+	.remove-left {
+		margin-left: 0!important;
+	}
+	
+	.remove-border-left {
+		border-left: none!important;
+	}
+	
+	.remove-padding-left {
+		padding-left: 0!important;
+	}
+	
+/**
+ * Text Alignment
+ */
+
+	.ac {
+		text-align: center;
+	}
+	
+	.ar {
+		text-align: right;
+	}
+	
+	.al {
+		text-align: left;
+	}
+	
+	@each $state in palm, lap, lap-and-up, portable, desk, desk-wide{
+	    @include from(#{$state}){
+	        .ac--#{$state}{
+	            text-align: center;
+	        }
+	        
+	        .ar--#{$state}{
+	            text-align: right;
+	        }
+	        
+	        .al--#{$state}{
+	            text-align: left;
+	        }
+	    }
+	}
+
+/**
+ * Reset line-height to 1
+ */
+
+	.lhr {
+		line-height: 1;
+	}
+
+/**
+ * Floats
+ *
+ * Here we're basically extending the inuit styles to make naming more flexible
+ * We're also adding an image specific style which'll add margins
+ */
+ 
+	.float--right, .fr, .right { 
+		float:right!important; 
+	}
+	
+	.float--left, .fl, .left { 
+		float:left !important; 
+	}
+	
+	img.float--right, img.fr, img.right { 
+		margin: 0 0 $half-spacing-unit $half-spacing-unit!important;
+	}
+	
+	img.float--left, img.fl, img.left { 
+		margin: 0 $half-spacing-unit $half-spacing-unit 0!important;
+	}
+	
+/**
+ * Hide content off-screen using `display:none;`, also provide
+ * breakpoint specific hidden elements.
+ */
+	@mixin hide {
+	    display: none;
+	}
+	.hide {
+	    @include hide;
+	}
+    @each $state in palm, lap, lap-and-up, portable, desk, desk-wide{
+        @include from(#{$state}){
+            .hide--#{$state},
+            .hide--#{$state}{
+                @include hide;
+            }
+        }
+    }
+	
+/**
+ * Social Colours
+ *
+ * Classes to add social colours to something!
+ */
+ 
+	@each $name, $color in $bc-colors {
+		.color-#{$name} {
+			color: $color;
+		}
+	}

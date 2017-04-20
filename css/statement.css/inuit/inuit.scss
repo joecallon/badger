@@ -1,0 +1,41 @@
+/* 
+   These are all holdovers from when inuit.css was used in our framework.
+   We found them super helpful for a myriad of things, so they're staying put right here! 
+*/
+
+/* 
+   #BASIC VARS
+*/
+$base-line-height: 24px;
+$base-spacing-unit: $base-line-height;
+$double-spacing-unit: ($base-spacing-unit * 2);
+$half-spacing-unit: ($base-spacing-unit / 2);
+
+/* 
+   #ISLANDS
+*/
+.island, .islet{
+    display: block;
+    @extend .cf;
+}
+
+.island{
+    padding:$base-spacing-unit;
+}
+
+.island > :last-child,
+.islet > :last-child{
+    margin-bottom:0;
+}
+
+.islet {
+    padding:$half-spacing-unit;
+}
+
+.landmark {
+	margin-bottom: $base-spacing-unit;
+}
+
+.canyon {
+	margin-bottom: $double-spacing-unit;
+}

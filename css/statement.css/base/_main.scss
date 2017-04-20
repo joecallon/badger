@@ -1,0 +1,16 @@
+/* #Some Basic Stuff
+========================================================================================= */
+ 
+/* Add behavior for IE so box sizing works as required */
+
+* {
+ 	 *behavior: url(boxsizing.htc);
+}
+
+/* Container sizing - full width */
+
+.container {
+	width: 1200px;
+	max-width: 95%;
+	margin: 0 auto;
+}

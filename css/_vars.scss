@@ -1,0 +1,45 @@
+/*------------------------------------*\
+    VARS.SCSS
+\*------------------------------------*/
+
+/*------------------------------------*\
+    $SITE STYLES
+\*------------------------------------*/
+/**
+ * Custom Site Variables. e.g - brand colours, fonts.
+ */
+
+
+
+
+
+/*------------------------------------*\
+    $Social Colours
+\*------------------------------------*/
+/**
+ * Colours for social network logos.
+ */
+
+$bc-colors: (
+	vine: #00AC7F,
+	vimeo: #1ab7ea,
+	twitter: #55acee,
+	linkedin: #0976b4,
+	facebook: #3b5998,
+	instagram: #3f729b,
+	tumblr: #35465c,
+	google: #dd4b39,
+	pinterest: #cc2127,
+	youtube: #e52d27,
+	statement: #d14949
+);
+
+@function bc-color($key) {
+	@if map-has-key($bc-colors, $key) {
+		@return map-get($bc-colors, $key);
+	}
+	
+	@warn "Unknown `#{$key}` in $colors.";
+	@return null;
+}
+// Usage: color: bc-color(twitter);
